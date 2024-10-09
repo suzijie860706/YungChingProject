@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\models\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\models\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009154243_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:YungChingProject\\Migrations\\20241009154243_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\data\\northwindcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,14 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|solutionrelative:yungchingproject\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9BDA6B9-59B5-4F8D-B71B-52E7F8CB6C0D}|YungChingProject\\YungChingProject.csproj|c:\\users\\zijie\\source\\repos\\yungchingproject\\yungchingproject\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,37 +62,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Models\\Customer.cs",
+              "RelativeDocumentMoniker": "YungChingProject\\Models\\Customer.cs",
+              "ToolTip": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Models\\Customer.cs",
+              "RelativeToolTip": "YungChingProject\\Models\\Customer.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAzwA0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T15:54:42.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Models\\SeedData.cs",
+              "RelativeDocumentMoniker": "YungChingProject\\Models\\SeedData.cs",
+              "ToolTip": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Models\\SeedData.cs",
+              "RelativeToolTip": "YungChingProject\\Models\\SeedData.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAYwB0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T15:44:14.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "20241009154243_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009154243_InitialCreate.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Migrations\\20241009154243_InitialCreate.cs",
               "ToolTip": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009154243_InitialCreate.cs",
               "RelativeToolTip": "YungChingProject\\Migrations\\20241009154243_InitialCreate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-09T15:42:43.95Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "CustomersController.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Controllers\\CustomersController.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Controllers\\CustomersController.cs",
               "ToolTip": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Controllers\\CustomersController.cs",
               "RelativeToolTip": "YungChingProject\\Controllers\\CustomersController.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAywGoAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-09T15:37:46.309Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "NorthwindContext.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Data\\NorthwindContext.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Data\\NorthwindContext.cs",
@@ -97,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "20241009141659_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009141659_InitialCreate.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Migrations\\20241009141659_InitialCreate.cs",
@@ -110,7 +144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "20241009141306_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009141306_InitialCreate.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Migrations\\20241009141306_InitialCreate.cs",
@@ -123,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Controllers\\WeatherForecastController.cs",
@@ -136,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "20241009135449_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009135449_InitialCreate.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Migrations\\20241009135449_InitialCreate.cs",
@@ -149,7 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Movie.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Models\\Movie.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Models\\Movie.cs",
@@ -162,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "20241009132613_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Migrations\\20241009132613_InitialCreate.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Migrations\\20241009132613_InitialCreate.cs",
@@ -175,20 +209,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\appsettings.json",
               "RelativeDocumentMoniker": "YungChingProject\\appsettings.json",
               "ToolTip": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\appsettings.json",
               "RelativeToolTip": "YungChingProject\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-10-09T13:25:59.601Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Zijie\\source\\repos\\YungChingProject\\YungChingProject\\Program.cs",
               "RelativeDocumentMoniker": "YungChingProject\\Program.cs",
