@@ -17,29 +17,66 @@ namespace YungChingProject.Data
         {
         }
 
+        public virtual DbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<CategorySalesFor1997> CategorySalesFor1997s { get; set; } = null!;
+        public virtual DbSet<CurrentProductList> CurrentProductLists { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
+        public virtual DbSet<CustomerAndSuppliersByCity> CustomerAndSuppliersByCities { get; set; } = null!;
         public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; } = null!;
         public virtual DbSet<Employee> Employees { get; set; } = null!;
+        public virtual DbSet<Invoice> Invoices { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
+        public virtual DbSet<OrderDetailsExtended> OrderDetailsExtendeds { get; set; } = null!;
+        public virtual DbSet<OrderSubtotal> OrderSubtotals { get; set; } = null!;
+        public virtual DbSet<OrdersQry> OrdersQries { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<ProductSalesFor1997> ProductSalesFor1997s { get; set; } = null!;
+        public virtual DbSet<ProductsAboveAveragePrice> ProductsAboveAveragePrices { get; set; } = null!;
+        public virtual DbSet<ProductsByCategory> ProductsByCategories { get; set; } = null!;
+        public virtual DbSet<QuarterlyOrder> QuarterlyOrders { get; set; } = null!;
         public virtual DbSet<Region> Regions { get; set; } = null!;
+        public virtual DbSet<SalesByCategory> SalesByCategories { get; set; } = null!;
+        public virtual DbSet<SalesTotalsByAmount> SalesTotalsByAmounts { get; set; } = null!;
         public virtual DbSet<Shipper> Shippers { get; set; } = null!;
+        public virtual DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarters { get; set; } = null!;
+        public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYears { get; set; } = null!;
         public virtual DbSet<Supplier> Suppliers { get; set; } = null!;
         public virtual DbSet<Territory> Territories { get; set; } = null!;
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Data Source= Server=.\\sqlexpress;Initial Catalog=Northwind;TrustServerCertificate=true;Trusted_Connection=True");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer(" Server=.\\sqlexpress;Initial Catalog=Northwind;TrustServerCertificate=true;Trusted_Connection=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AlphabeticalListOfProduct>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Alphabetical list of products");
+
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+
+                entity.Property(e => e.CategoryName).HasMaxLength(15);
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
+
+                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
+            });
+
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasIndex(e => e.CategoryName, "CategoryName");
@@ -53,6 +90,30 @@ namespace YungChingProject.Data
                 entity.Property(e => e.Picture).HasColumnType("image");
             });
 
+            modelBuilder.Entity<CategorySalesFor1997>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Category Sales for 1997");
+
+                entity.Property(e => e.CategoryName).HasMaxLength(15);
+
+                entity.Property(e => e.CategorySales).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<CurrentProductList>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Current Product List");
+
+                entity.Property(e => e.ProductId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+            });
+
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasIndex(e => e.City, "City");
@@ -61,7 +122,7 @@ namespace YungChingProject.Data
 
                 entity.HasIndex(e => e.PostalCode, "PostalCode");
 
-                entity.HasIndex(e => e.Region, "Region");
+                entity.HasIndex(e => e.Area, "Area");
 
                 entity.Property(e => e.CustomerId)
                     .HasMaxLength(5)
@@ -86,7 +147,7 @@ namespace YungChingProject.Data
 
                 entity.Property(e => e.PostalCode).HasMaxLength(10);
 
-                entity.Property(e => e.Region).HasMaxLength(15);
+                entity.Property(e => e.Area).HasMaxLength(15);
 
                 entity.HasMany(d => d.CustomerTypes)
                     .WithMany(p => p.Customers)
@@ -100,12 +161,27 @@ namespace YungChingProject.Data
 
                             j.ToTable("CustomerCustomerDemo");
 
-                            j.HasIndex(new[] { "CustomerTypeId" }, "IX_CustomerCustomerDemo_CustomerTypeID");
-
                             j.IndexerProperty<string>("CustomerId").HasMaxLength(5).HasColumnName("CustomerID").IsFixedLength();
 
                             j.IndexerProperty<string>("CustomerTypeId").HasMaxLength(10).HasColumnName("CustomerTypeID").IsFixedLength();
                         });
+            });
+
+            modelBuilder.Entity<CustomerAndSuppliersByCity>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Customer and Suppliers by City");
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.CompanyName).HasMaxLength(40);
+
+                entity.Property(e => e.ContactName).HasMaxLength(30);
+
+                entity.Property(e => e.Relationship)
+                    .HasMaxLength(9)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<CustomerDemographic>(entity =>
@@ -123,11 +199,9 @@ namespace YungChingProject.Data
 
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.HasIndex(e => e.ReportsTo, "IX_Employees_ReportsTo");
-
                 entity.HasIndex(e => e.LastName, "LastName");
 
-                entity.HasIndex(e => e.PostalCode, "PostalCode1");
+                entity.HasIndex(e => e.PostalCode, "PostalCode");
 
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
@@ -180,12 +254,68 @@ namespace YungChingProject.Data
 
                             j.ToTable("EmployeeTerritories");
 
-                            j.HasIndex(new[] { "TerritoryId" }, "IX_EmployeeTerritories_TerritoryID");
-
                             j.IndexerProperty<int>("EmployeeId").HasColumnName("EmployeeID");
 
                             j.IndexerProperty<string>("TerritoryId").HasMaxLength(20).HasColumnName("TerritoryID");
                         });
+            });
+
+            modelBuilder.Entity<Invoice>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Invoices");
+
+                entity.Property(e => e.Address).HasMaxLength(60);
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength();
+
+                entity.Property(e => e.CustomerName).HasMaxLength(40);
+
+                entity.Property(e => e.ExtendedPrice).HasColumnType("money");
+
+                entity.Property(e => e.Freight).HasColumnType("money");
+
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.Region).HasMaxLength(15);
+
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Salesperson).HasMaxLength(31);
+
+                entity.Property(e => e.ShipAddress).HasMaxLength(60);
+
+                entity.Property(e => e.ShipCity).HasMaxLength(15);
+
+                entity.Property(e => e.ShipCountry).HasMaxLength(15);
+
+                entity.Property(e => e.ShipName).HasMaxLength(40);
+
+                entity.Property(e => e.ShipPostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.ShipRegion).HasMaxLength(15);
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipperName).HasMaxLength(40);
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -289,6 +419,82 @@ namespace YungChingProject.Data
                     .HasConstraintName("FK_Order_Details_Products");
             });
 
+            modelBuilder.Entity<OrderDetailsExtended>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Order Details Extended");
+
+                entity.Property(e => e.ExtendedPrice).HasColumnType("money");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<OrderSubtotal>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Order Subtotals");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.Subtotal).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<OrdersQry>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Orders Qry");
+
+                entity.Property(e => e.Address).HasMaxLength(60);
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.CompanyName).HasMaxLength(40);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength();
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.Freight).HasColumnType("money");
+
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.PostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.Region).HasMaxLength(15);
+
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ShipAddress).HasMaxLength(60);
+
+                entity.Property(e => e.ShipCity).HasMaxLength(15);
+
+                entity.Property(e => e.ShipCountry).HasMaxLength(15);
+
+                entity.Property(e => e.ShipName).HasMaxLength(40);
+
+                entity.Property(e => e.ShipPostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.ShipRegion).HasMaxLength(15);
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasIndex(e => e.CategoryId, "CategoriesProducts");
@@ -332,6 +538,61 @@ namespace YungChingProject.Data
                     .HasConstraintName("FK_Products_Suppliers");
             });
 
+            modelBuilder.Entity<ProductSalesFor1997>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Product Sales for 1997");
+
+                entity.Property(e => e.CategoryName).HasMaxLength(15);
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.ProductSales).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<ProductsAboveAveragePrice>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Products Above Average Price");
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.UnitPrice).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<ProductsByCategory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Products by Category");
+
+                entity.Property(e => e.CategoryName).HasMaxLength(15);
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
+            });
+
+            modelBuilder.Entity<QuarterlyOrder>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Quarterly Orders");
+
+                entity.Property(e => e.City).HasMaxLength(15);
+
+                entity.Property(e => e.CompanyName).HasMaxLength(40);
+
+                entity.Property(e => e.Country).HasMaxLength(15);
+
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(5)
+                    .HasColumnName("CustomerID")
+                    .IsFixedLength();
+            });
+
             modelBuilder.Entity<Region>(entity =>
             {
                 entity.HasKey(e => e.RegionId)
@@ -348,6 +609,36 @@ namespace YungChingProject.Data
                     .IsFixedLength();
             });
 
+            modelBuilder.Entity<SalesByCategory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Sales by Category");
+
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+
+                entity.Property(e => e.CategoryName).HasMaxLength(15);
+
+                entity.Property(e => e.ProductName).HasMaxLength(40);
+
+                entity.Property(e => e.ProductSales).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<SalesTotalsByAmount>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Sales Totals by Amount");
+
+                entity.Property(e => e.CompanyName).HasMaxLength(40);
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.SaleAmount).HasColumnType("money");
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Shipper>(entity =>
             {
                 entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
@@ -357,11 +648,37 @@ namespace YungChingProject.Data
                 entity.Property(e => e.Phone).HasMaxLength(24);
             });
 
+            modelBuilder.Entity<SummaryOfSalesByQuarter>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Summary of Sales by Quarter");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Subtotal).HasColumnType("money");
+            });
+
+            modelBuilder.Entity<SummaryOfSalesByYear>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("Summary of Sales by Year");
+
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Subtotal).HasColumnType("money");
+            });
+
             modelBuilder.Entity<Supplier>(entity =>
             {
-                entity.HasIndex(e => e.CompanyName, "CompanyName1");
+                entity.HasIndex(e => e.CompanyName, "CompanyName");
 
-                entity.HasIndex(e => e.PostalCode, "PostalCode2");
+                entity.HasIndex(e => e.PostalCode, "PostalCode");
 
                 entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
 
@@ -392,8 +709,6 @@ namespace YungChingProject.Data
             {
                 entity.HasKey(e => e.TerritoryId)
                     .IsClustered(false);
-
-                entity.HasIndex(e => e.RegionId, "IX_Territories_RegionID");
 
                 entity.Property(e => e.TerritoryId)
                     .HasMaxLength(20)

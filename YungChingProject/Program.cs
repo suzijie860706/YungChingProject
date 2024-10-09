@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using YungChingProject.Data;
+using YungChingProject.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,14 +9,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<NorthwindContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("NorthwindConnection")));
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 
 // µù¥U Swagger
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//Åª¨úSeedData
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 if (app.Environment.IsDevelopment())
 {
