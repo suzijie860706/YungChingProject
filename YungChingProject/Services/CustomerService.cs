@@ -58,7 +58,6 @@ namespace YungChingProject.Services
             existingCustomer.Phone = customer.Phone;
             existingCustomer.Fax = customer.Fax;
 
-
             // Use repository to update the customer
             await _repository.UpdateAsync(customer);
 

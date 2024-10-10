@@ -4,12 +4,20 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using YungChingProject.Data;
 using YungChingProject.Models;
+using YungChingProject.Repositories;
+using YungChingProject.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // µù¥U DbContext ¨Ã¨Ï¥Î SQLite
 builder.Services.AddDbContext<NorthwindContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("NorthwindConnection")));
+
+//Business Layer
+builder.Services.AddScoped<ICRUDRepository<Customer>, CRUDRepository<Customer, NorthwindContext>>();
+
+//Controller Layer
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 builder.Services.AddControllers();
 

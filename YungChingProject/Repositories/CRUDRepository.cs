@@ -40,13 +40,11 @@ namespace YungChingProject.Repositories
 
         public async Task<TEntity?> FindByIdAsync(int id)
         {
-            var data = await _context.FindAsync(typeof(TEntity), 1);
             return await _dbSet.FindAsync(id);
         }
 
         public async Task<TEntity?> FindByIdAsync(string id)
         {
-            var data = await _context.FindAsync(typeof(TEntity), 1);
             return await _dbSet.FindAsync(id);
         }
 
