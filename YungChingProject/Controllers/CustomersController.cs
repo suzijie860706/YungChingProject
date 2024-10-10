@@ -50,6 +50,7 @@ namespace YungChingProject.Controllers
         /// <summary>
         /// 更新客戶資料
         /// </summary>
+        /// <param name="customerId">客戶名稱</param>
         /// <param name="customer"></param>
         /// <returns></returns>
         [HttpPut("{customerId}")]
