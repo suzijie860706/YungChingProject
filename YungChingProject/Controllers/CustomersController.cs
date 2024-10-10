@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using YungChingProject.Data;
 using YungChingProject.Models;
+using YungChingProject.Services;
 
 namespace YungChingProject.Controllers
 {
@@ -14,11 +16,11 @@ namespace YungChingProject.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly NorthwindContext _context;
+        private readonly ICustomerService _customerService;
 
-        public CustomersController(NorthwindContext context)
+        public CustomersController(ICustomerService customerService)
         {
-            _context = context;
+            _customerService = customerService;
         }
 
         /// <summary>
@@ -27,10 +29,9 @@ namespace YungChingProject.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Customer>), 200)]
-        [ProducesResponseType(204)]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            return Ok(await _customerService.GetAllCustomersAsync());
         }
 
         /// <summary>
@@ -43,8 +44,12 @@ namespace YungChingProject.Controllers
         [ProducesResponseType(204)]
         public async Task<ActionResult<Customer?>> GetCustomer(string customerId)
         {
-            var customer = await _context.Customers.FindAsync(customerId);
-            return customer;
+            var customer = await _customerService.GetCustomerByIdAsync(customerId);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            return Ok(customer);
         }
 
         /// <summary>
@@ -64,15 +69,13 @@ namespace YungChingProject.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _customerService.UpdateCustomerAsync(customerId, customer);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(customer.CustomerId))
+                if (!await CustomerExists(customer.CustomerId))
                 {
                     return NotFound();
                 }
@@ -95,14 +98,14 @@ namespace YungChingProject.Controllers
         [ProducesResponseType(409)]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-            _context.Customers.Add(customer);
             try
             {
-                await _context.SaveChangesAsync();
+                Customer createdCustomer = await _customerService.CreateCustomerAsync(customer);
+                return CreatedAtAction(nameof(GetCustomer), new { customerId = customer.CustomerId }, customer);
             }
             catch (DbUpdateException)
             {
-                if (CustomerExists(customer.CustomerId))
+                if (await CustomerExists(customer.CustomerId))
                 {
                     return Conflict();
                 }
@@ -111,8 +114,6 @@ namespace YungChingProject.Controllers
                     throw;
                 }
             }
-
-            return CreatedAtAction(nameof(GetCustomer), new { customerId = customer.CustomerId }, customer);
         }
 
         /// <summary>
@@ -125,14 +126,11 @@ namespace YungChingProject.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteCustomer(string customerId)
         {
-            var customer = await _context.Customers.FindAsync(customerId);
-            if (customer == null)
+            bool isDeleted = await _customerService.DeleteCustomerAsync(customerId);
+            if (!isDeleted)
             {
                 return NotFound();
             }
-
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -142,9 +140,11 @@ namespace YungChingProject.Controllers
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        private bool CustomerExists(string customerId)
+        private async Task<bool> CustomerExists(string customerId)
         {
-            return (_context.Customers?.Any(e => e.CustomerId == customerId)).GetValueOrDefault();
+            Customer? customer = await _customerService.GetCustomerByIdAsync(customerId);
+            if (customer == null) return false;
+            else return true;
         }
     }
 }

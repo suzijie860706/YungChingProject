@@ -2,10 +2,6 @@
 
 namespace YungChingProject.Repositories
 {
-    /// <summary>
-    /// CRUD倉儲層接口
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
     public interface ICRUDRepository<TEntity> where TEntity : class
     {
         /// <summary>
@@ -34,6 +30,13 @@ namespace YungChingProject.Repositories
         /// <param name="id"></param>
         /// <returns></returns>
         Task<TEntity?> FindByIdAsync(int id);
+
+        /// <summary>
+        /// 單一查詢
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<TEntity?> FindByIdAsync(string id);
 
         /// <summary>
         /// 多筆查詢
