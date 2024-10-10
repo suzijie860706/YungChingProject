@@ -11,10 +11,14 @@ namespace YungChingProject.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<NorthwindContext>>()))
             {
+                // Clear any existing data
+                context.Customers.RemoveRange(context.Customers);
+                context.SaveChanges();
+
                 // Look for any movies.
                 if (context.Customers.Any())
                 {
-                    return;   // DB has been seeded
+                    return;  // DB has been seeded
                 }
                 context.Customers.AddRange(
                     new Customer

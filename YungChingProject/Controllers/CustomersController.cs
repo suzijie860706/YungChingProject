@@ -21,41 +21,44 @@ namespace YungChingProject.Controllers
             _context = context;
         }
 
-        // GET: api/Customers
+        /// <summary>
+        /// 查詢所有客戶
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Customer>), 200)]
+        [ProducesResponseType(204)]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-          if (_context.Customers == null)
-          {
-              return NotFound();
-          }
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(string id)
+        /// <summary>
+        /// 查詢指定客戶資料
+        /// </summary>
+        /// <param name="customerId">客戶名稱</param>
+        /// <returns></returns>
+        [HttpGet("{customerId}")]
+        [ProducesResponseType(typeof(Customer), 200)]
+        [ProducesResponseType(204)]
+        public async Task<ActionResult<Customer?>> GetCustomer(string customerId)
         {
-          if (_context.Customers == null)
-          {
-              return NotFound();
-          }
-            var customer = await _context.Customers.FindAsync(id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
+            var customer = await _context.Customers.FindAsync(customerId);
             return customer;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, Customer customer)
+        /// <summary>
+        /// 更新客戶資料
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        [HttpPut("{customerId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> PutCustomer(string customerId, Customer customer)
         {
-            if (id != customer.CustomerId)
+            if (customerId != customer.CustomerId)
             {
                 return BadRequest();
             }
@@ -68,7 +71,7 @@ namespace YungChingProject.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!CustomerExists(customer.CustomerId))
                 {
                     return NotFound();
                 }
@@ -81,21 +84,22 @@ namespace YungChingProject.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// 新增客戶資料
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(Customer), 201)]
+        [ProducesResponseType(409)]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-          if (_context.Customers == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Customers'  is null.");
-          }
             _context.Customers.Add(customer);
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
                 if (CustomerExists(customer.CustomerId))
                 {
@@ -107,18 +111,20 @@ namespace YungChingProject.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCustomer", new { id = customer.CustomerId }, customer);
+            return CreatedAtAction(nameof(GetCustomer), new { customerId = customer.CustomerId }, customer);
         }
 
-        // DELETE: api/Customers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(string id)
+        /// <summary>
+        /// 刪除
+        /// </summary>
+        /// <param name="customerId">客戶名稱</param>
+        /// <returns></returns>
+        [HttpDelete("{customerId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> DeleteCustomer(string customerId)
         {
-            if (_context.Customers == null)
-            {
-                return NotFound();
-            }
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(customerId);
             if (customer == null)
             {
                 return NotFound();
@@ -130,9 +136,14 @@ namespace YungChingProject.Controllers
             return NoContent();
         }
 
-        private bool CustomerExists(string id)
+        /// <summary>
+        /// 查詢客戶是否存在
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
+        private bool CustomerExists(string customerId)
         {
-            return (_context.Customers?.Any(e => e.CustomerId == id)).GetValueOrDefault();
+            return (_context.Customers?.Any(e => e.CustomerId == customerId)).GetValueOrDefault();
         }
     }
 }
